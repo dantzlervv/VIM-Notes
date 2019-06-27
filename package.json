@@ -1,0 +1,30 @@
+{
+  "name": "step-notes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dantzlervv/Step-Notes.git"
+  },
+  "author": "Vilena Irina Marina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dantzlervv/Step-Notes/issues"
+  },
+  "homepage": "https://github.com/dantzlervv/Step-Notes#readme",
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.9.0",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "mongodb": "^3.2.7",
+    "nodemon": "^1.19.1"
+  }
+}

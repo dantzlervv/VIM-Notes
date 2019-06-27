@@ -1,0 +1,5 @@
+.bg {
+    background: url("/img/bg.jpg") no-repeat !important;
+    background-size: cover;
+    height: 80vh;
+}
