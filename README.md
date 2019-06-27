@@ -1,6 +1,6 @@
 # VIM-Notes
 
-Created with NodeJS, EJS, Bootstrap
+Created with NodeJS, EJS, MongoDB, Bootstrap
 
 Authors: 
 
