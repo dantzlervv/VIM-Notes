@@ -44,7 +44,22 @@ const getLists  = async () => {
     return data;
 };
 
+const getList  = async list => {
+    const client = new MongoClient(uri, { useNewUrlParser: true });
+    await client.connect();
+    const usersCollection = await client.db(db).collection("Lists");
+    const data = await usersCollection.findOne(list);
+    client.close();
+    return data;
+};
 
+const updateList  = async (query, newData) => {
+    const client = new MongoClient(uri, { useNewUrlParser: true });
+    await client.connect();
+    const usersCollection = await client.db(db).collection("Lists");
+    await usersCollection.updateOne(query, { $set: newData }, { upset: true });
+    client.close();
+};
 
 const deleteNote = async note => {
     const client = new MongoClient(uri, { useNewUrlParser: true });
@@ -75,5 +90,7 @@ module.exports = {
     getNotes,
     getLists,
     deleteNote,
-    deleteList
+    deleteList,
+    getList,
+    updateList
 };
