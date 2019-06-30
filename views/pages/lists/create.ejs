@@ -4,23 +4,23 @@
 <header>
     <% include ../../partials/header %>
 </header>
-
 <body class="container">
-
 <main>
     <div class="bg-light rounded py-3" style="height: 80vh">
-
         <div class="form-group w-50 mx-auto">
-            <input type="text" class="form-control" id="" placeholder="List Title">
+
+            <form id="list-form" action="/lists/create" method="POST">
+                <input type="text" class="form-control" id="" placeholder="List Title" name="listName" required>
+                <input type="text" class="form-control" id="new-item" placeholder="Add an item">
+                <input id="add-item" type="button" value="Add" class="btn btn-info btn-md text-light">
+                <button type="submit" class="btn btn-warning btn-md text-light" style="left: 47%;">Create</button>
+            </form>
+
         </div>
-
-
-        <button type="submit" class="btn btn-warning btn-md position-absolute text-light" style="left: 47%;">Create</button>
-
     </div>
 </main>
-
 <footer>
     <% include ../../partials/footer %>
 </footer>
+<script src="/clientJS/lists/create.js"></script>
 </body>
