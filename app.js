@@ -13,16 +13,32 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 
 app.get('/', async function(req, res) {
-    const lists = await db.getLists();
-    res.render('pages/index', {lists});
+    // const lists = await db.getLists();
+    // res.render('pages/index', {lists});
+    const notes = await db.getNotes();
+    res.render('pages/index', {notes});
 });
 
 app.get('/notes/create', function(req, res) {
     res.render('pages/notes/create');
 });
 
-app.get('/notes/edit', function(req, res) {
-    res.render('pages/notes/edit');
+app.get('/notes/edit/:id', async function(req, res) {
+    const query = { _id: ObjectId(req.params.id) };
+    let result = null;
+    try {
+        result = await db.getNote(query);
+    } catch (err) {
+        if (result) console.log(err);
+    }
+
+    const note = {
+        _id: query._id,
+        noteTitle: result.noteTitle,
+        noteTextContent: result.noteTextContent
+    };
+    // console.log(note);
+    res.render('pages/notes/edit', {note});
 });
 
 app.get('/lists/create', function(req, res) {
@@ -100,4 +116,45 @@ app.post('/lists/create', async function(req, res){
     //res.end();
     const lists = await db.getLists();
     res.render('pages/', {lists});
+});
+
+app.post('/notes/create', async function(req, res){
+    const note = {
+        noteTitle: req.body.noteTitle,
+        noteTextContent :req.body.noteTextContent
+    };
+    await db.addNote(note);
+    const notes = await db.getNotes();
+    res.render('pages/', {notes});
+});
+
+app.put("/notes/edit/:id", async function(req, res) {
+    console.log("put ok");
+    const query = { _id: ObjectId(req.params.id) };
+    const newData = {
+        _id: query._id,
+        noteTitle: req.body.noteTitle,
+        noteTextContent: req.body.noteTextContent
+    };
+    let result = null;
+    try {
+        result = await db.updateNote(query, newData);
+    } catch (err) {
+        console.log(err);
+    }
+    const notes = await db.getNotes();
+    res.render('pages/', {notes});
+});
+
+app.delete("/notes/edit/:id", async function(req, res) {
+    console.log("delete ok");
+    const query = { _id: ObjectId(req.params.id) };
+    let result = null;
+    try {
+        result = await db.deleteNote(query);
+    } catch (err) {
+        console.log(err);
+    }
+    const notes = await db.getNotes();
+    res.render('pages/', {notes});
 });
