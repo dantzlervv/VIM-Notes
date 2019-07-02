@@ -1,0 +1,30 @@
+<head>
+    <% include ../../partials/head %>
+</head>
+<header>
+    <% include ../../partials/header %>
+</header>
+<body class="container">
+<main>
+    <div class="bg-light rounded py-3" style="height: 80vh">
+        <div class="form-group w-50 mx-auto">
+            <form id="edit-note" method="">
+                <div>
+                    <input id="id-note" type='hidden' value="<%= note._id %>">
+                    <input type="text" id = "note-title" class="d-inline-block" value="<%= note.noteTitle %>">
+                    <input type="text" id="note-text" class="d-inline-block" value="<%= note.noteTextContent %>">
+                    <button id="edit-note" type="submit" class="btn btn-info btn-md text-light" style="left: 47%;">Save
+                        changes</button>
+                </div>
+            </form>
+            <button id="delete-note" type="submit" class="btn btn-info btn-md text-light" style="left: 47%;
+">Delete note</button>
+
+        </div>
+    </div>
+</main>
+<footer>
+    <% include ../../partials/footer %>
+</footer>
+<script src="/clientJS/notes/edit.js"></script>
+</body>

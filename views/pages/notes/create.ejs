@@ -11,16 +11,18 @@
     <div class="bg-light rounded py-3" style="height: 80vh">
 
         <div class="form-group w-50 mx-auto">
-                <input type="text" class="form-control" id="" placeholder="Title">
-            </div>
 
-            <div class="form-group w-50 mx-auto">
-                <textarea class="form-control" rows="5" id=""></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-warning btn-md position-absolute text-light" style="left: 47%;">Create</button>
+            <form action="/notes/create" class="form-group" method="POST">
+                <input type="text" name="noteTitle"  placeholder="Title" class="form-control">
+                <input type="text" name="noteTextContent"  placeholder="Note content" class="form-control">
+                <button type="submit" id="add-note" class="btn btn-warning btn-md position-absolute text-light"
+                        style="left: 47%;
+">Create</button>
+            </form>
 
         </div>
+
+    </div>
 </main>
 
 <footer>
