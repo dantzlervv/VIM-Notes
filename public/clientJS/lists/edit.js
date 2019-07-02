@@ -87,6 +87,13 @@ function checkboxSaveChanges(target){
     input.value = '';
 }
 
+
+
+
+
+
+
+
 function putData() {
     event.preventDefault();
     let idList = document.getElementById("idList").value;
