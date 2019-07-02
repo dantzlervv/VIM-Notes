@@ -11,8 +11,8 @@ const testConnection = async () => {
 const addNote = async note => {
     const client = new MongoClient(uri, { useNewUrlParser: true });
     await client.connect();
-    const usersCollection = await client.db(db).collection("Notes");
-    await usersCollection.insertOne(note);
+    const notesCollection = await client.db(db).collection("Notes");
+    await notesCollection.insertOne(note);
     console.log("1 document inserted");
     client.close();
 };
@@ -29,8 +29,8 @@ const addList = async list => {
 const getNotes  = async () => {
     const client = new MongoClient(uri, { useNewUrlParser: true });
     await client.connect();
-    const usersCollection = await client.db(db).collection("Notes");
-    const data = await usersCollection.find({}).toArray();
+    const notesCollection = await client.db(db).collection("Notes");
+    const data = await notesCollection.find({}).toArray();
     client.close();
     return data;
 };
@@ -44,13 +44,28 @@ const getLists  = async () => {
     return data;
 };
 
+const getList  = async list => {
+    const client = new MongoClient(uri, { useNewUrlParser: true });
+    await client.connect();
+    const usersCollection = await client.db(db).collection("Lists");
+    const data = await usersCollection.findOne(list);
+    client.close();
+    return data;
+};
 
+const updateList  = async (query, newData) => {
+    const client = new MongoClient(uri, { useNewUrlParser: true });
+    await client.connect();
+    const usersCollection = await client.db(db).collection("Lists");
+    await usersCollection.updateOne(query, { $set: newData }, { upset: true });
+    client.close();
+};
 
 const deleteNote = async note => {
     const client = new MongoClient(uri, { useNewUrlParser: true });
     await client.connect();
-    const usersCollection = await client.db(db).collection("Notes");
-    await usersCollection.deleteOne(note);
+    const notesCollection = await client.db(db).collection("Notes");
+    await notesCollection.deleteOne(note);
     console.log('deleted one note');
     client.close();
 };
@@ -64,8 +79,22 @@ const deleteList = async list => {
     client.close();
 };
 
+const getNote  = async note => {
+    const client = new MongoClient(uri, { useNewUrlParser: true });
+    await client.connect();
+    const notesCollection = await client.db(db).collection("Notes");
+    const data = await notesCollection.findOne(note);
+    client.close();
+    return data;
+};
 
-
+const updateNote  = async (query, newData) => {
+    const client = new MongoClient(uri, { useNewUrlParser: true });
+    await client.connect();
+    const notesCollection = await client.db(db).collection("Notes");
+    await notesCollection.updateOne(query, { $set: newData }, { upset: true });
+    client.close();
+};
 
 
 module.exports = {
@@ -75,5 +104,9 @@ module.exports = {
     getNotes,
     getLists,
     deleteNote,
-    deleteList
+    deleteList,
+    getList,
+    updateList,
+    getNote,
+    updateNote
 };
