@@ -10,15 +10,15 @@
 </header>
 
 <main>
-<!--    <div class="bg-light rounded" style="height: 80vh">-->
-<!--        <!% lists.forEach(function(list) { %>-->
-<!--            <a href="/lists/edit/<!%= list._id %>">-->
-<!--                <div>-->
-<!--                    <!%= list.listName %>-->
-<!--                </div>-->
-<!--            </a>-->
-<!--        <!% }); %>-->
-<!--    </div>-->
+    <div class="bg-light rounded" style="height: 80vh">
+        <% lists.forEach(function(list) { %>
+            <a href="/lists/edit/<%= list._id %>">
+                <div>
+                    <%= list.listName %>
+                </div>
+            </a>
+        <% }); %>
+    </div>
     <div class="bg-light rounded" style="height: 80vh">
         <% notes.forEach(function(note) { %>
             <a href="/notes/edit/<%= note._id %>">

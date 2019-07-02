@@ -82,6 +82,13 @@ function createItem(){
     document.getElementById("new-item").value = '';
 }
 
+
+
+
+
+
+
+
 function putData() {
     event.preventDefault();
     let idList = document.getElementById("idList").value;
