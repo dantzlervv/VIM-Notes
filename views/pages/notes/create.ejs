@@ -13,11 +13,12 @@
         <div class="form-group w-50 mx-auto">
 
             <form action="/notes/create" class="form-group" method="POST">
-                <input type="text" name="noteTitle"  placeholder="Title" class="form-control">
+                <input type="text" name="noteTitle"  placeholder="Title" class="form-control" required>
                 <input type="text" name="noteTextContent"  placeholder="Note content" class="form-control">
                 <button type="submit" id="add-note" class="btn btn-warning btn-md position-absolute text-light"
                         style="left: 47%;
 ">Create</button>
+                <a href="/"><button type="button" class="btn btn-primary btn-lg">Cancel</button></a>
             </form>
 
         </div>
