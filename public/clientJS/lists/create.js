@@ -1,7 +1,19 @@
+const addCheckboxDiv = document.getElementById('add-checkbox');
+const plusButton = document.getElementById('plus-btn');
+const checksDiv = document.getElementById('checks');
+
 document.addEventListener('click', function (e) {
     let target = e.target;
-    if(target.id === 'add-item'){
+    if(target.id === 'add-item-btn'){
         createItem();
+    }
+    else if(target.id === 'plus-btn'){
+        addCheckboxDiv.hidden = false;
+        plusButton.hidden = true;
+    }
+    else if(target.id === 'add-cancel-btn'){
+        addCheckboxDiv.hidden = true;
+        plusButton.hidden = false;
     }
 });
 
@@ -23,15 +35,18 @@ function createItem(){
     let inputLabel = document.createElement('label');
     inputLabel.innerText = valueOfInput;
 
-    document.getElementById('list-form').appendChild(listDiv);
+    checksDiv.appendChild(listDiv);
     listDiv.appendChild(checkItem);
     listDiv.appendChild(inputLabel);
 
     document.getElementById("new-item").value = '';
+    addCheckboxDiv.hidden = true;
+    plusButton.hidden = false;
 }
 
 document.addEventListener('submit', function (e) {
     //e.preventDefault();
+    checksDiv.hidden = true;
     const checkItems = document.querySelectorAll('.check-item');
     checkItems.forEach(function(element){
        if(!element.checked){
