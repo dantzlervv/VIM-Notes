@@ -1,57 +1,64 @@
-const addCheckboxDiv = document.getElementById('add-checkbox');
-const plusButton = document.getElementById('plus-btn');
 const checksDiv = document.getElementById('checks');
 
 document.addEventListener('click', function (e) {
     let target = e.target;
-    if(target.id === 'add-item-btn'){
+    if(target.id === 'plus-btn') {
         createItem();
     }
-    else if(target.id === 'plus-btn'){
-        addCheckboxDiv.hidden = false;
-        plusButton.hidden = true;
+    else if(target.classList.contains('delete-btn')) {
+        let parent = target.parentNode;
+        parent.remove();
     }
-    else if(target.id === 'add-cancel-btn'){
-        addCheckboxDiv.hidden = true;
-        plusButton.hidden = false;
+    else if(target.classList.contains('check-item')) {
+        let clone = moveItem(target);
+        if(target.checked === true) {
+            checksDiv.appendChild(clone);
+        }
+        else {
+            checksDiv.insertBefore(clone, checksDiv.firstChild);
+        }
     }
 });
 
-function createItem(){
-    let valueOfInput = document.getElementById("new-item").value;
-    if(!valueOfInput){
-        alert("Please fill the input!");
-        return;
-    }
-
+function createItem() {
     let listDiv = document.createElement('div');
 
     let checkItem = document.createElement('input');
-    checkItem.classList.add('check-item');
     checkItem.type = 'checkbox';
-    checkItem.name = 'taskName';
-    checkItem.value = valueOfInput;
+    checkItem.name = 'task';
+    checkItem.classList.add('check-item');
 
-    let inputLabel = document.createElement('label');
-    inputLabel.innerText = valueOfInput;
+    let inputItem = document.createElement('input');
+    inputItem.type = 'text';
+    inputItem.classList.add('d-inline-block', 'input-item');
+    inputItem.name = "taskName";
+
+    let cancelBtn = document.createElement('button');
+    cancelBtn.classList.add('btn', 'btn-danger', 'btn-md', 'text-light', 'delete-btn');
+    cancelBtn.innerText = 'x';
 
     checksDiv.appendChild(listDiv);
     listDiv.appendChild(checkItem);
-    listDiv.appendChild(inputLabel);
+    listDiv.appendChild(inputItem);
+    listDiv.appendChild(cancelBtn);
+}
 
-    document.getElementById("new-item").value = '';
-    addCheckboxDiv.hidden = true;
-    plusButton.hidden = false;
+function moveItem(target) {
+    let parent = target.parentNode;
+    let clone = parent.cloneNode(true);
+    parent.remove();
+    return clone;
 }
 
 document.addEventListener('submit', function (e) {
     //e.preventDefault();
-    checksDiv.hidden = true;
-    const checkItems = document.querySelectorAll('.check-item');
+    const checkItems = document.querySelectorAll('input.input-item');
     checkItems.forEach(function(element){
-       if(!element.checked){
-           element.checked = true;
-           element.name = element.name + '0';
-       }
+        let checkboxItem = element.previousElementSibling;
+        if(element.value) {
+            if (!checkboxItem.checked) {
+                element.name = element.name + '0';
+            }
+        }
     });
 });
