@@ -66,12 +66,18 @@ db.testConnection();
 app.listen(3000);
 console.log('all is good');
 
-app.post('/notes/create', async function (req, res){
+app.post('/notes/create', async function (req, res) {
+    console.log("post ok");
     const note = {
         noteTitle: req.body.noteTitle,
         noteTextContent :req.body.noteTextContent
     };
-    await db.addNote(note);
+    let result = null;
+    try {
+        result = await db.addNote(note);
+    } catch (err) {
+        console.log(err);
+    }
     const notes = await db.getNotes();
     const lists = await db.getLists();
     res.render('pages/', {notes, lists});
@@ -111,13 +117,19 @@ app.delete("/notes/edit/:id", async function (req, res) {
 });
 
 
-app.post('/lists/create', async function (req, res){
+app.post('/lists/create', async function (req, res) {
+    console.log("post ok");
     const list = {
         listName: req.body.listName,
         listItemChecked: req.body.taskName,
-        listItem: req.body.taskName0,
+        listItem: req.body.taskName0
     };
-    await db.addList(list);
+    let result = null;
+    try {
+        result = await db.addList(list);
+    } catch (err) {
+        console.log(err);
+    }
     const notes = await db.getNotes();
     const lists = await db.getLists();
     res.render('pages/', {notes, lists});

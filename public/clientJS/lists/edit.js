@@ -1,107 +1,83 @@
-const addCheckboxDiv = document.getElementById('add-checkbox');
-const plusButton = document.getElementById('plus-btn');
 const checksDiv = document.getElementById('checks');
 
 document.addEventListener('click', function (e) {
     let target = e.target;
-    if(target.id === 'add-item-btn'){
+    if(target.id === 'plus-btn') {
         createItem();
     }
-    else if(target.id === 'plus-btn'){
-        addCheckboxDiv.hidden = false;
-        plusButton.hidden = true;
-    }
-    else if(target.id === 'add-cancel-btn'){
-        addCheckboxDiv.hidden = true;
-        plusButton.hidden = false;
-    }
-    else if(target.id === 'save-changes'){
+    else if(target.id === 'save-changes') {
         putData();
     }
-    else if(target.id === 'delete-list'){
+    else if(target.id === 'delete-list') {
         deleteData();
     }
-    else if(target.classList.contains('delete-btn')){
+    else if(target.classList.contains('delete-btn')) {
         let parent = target.parentNode;
         parent.remove();
     }
-    else if(target.classList.contains('edit-btn')){
-        target.hidden = true;
-        target.nextElementSibling.hidden = false;
-    }
-    else if(target.classList.contains('save-btn')){
-        checkboxSaveChanges(target);
-    }
-    else if(target.classList.contains('cancel-btn')){
-        let parent = target.parentNode;
-        let editButton = parent.previousElementSibling;
-        parent.hidden = true;
-        editButton.hidden = false;
+    else if(target.classList.contains('check-item')) {
+        let clone = moveItem(target);
+        if(target.checked === true) {
+            checksDiv.appendChild(clone);
+        }
+        else {
+            checksDiv.insertBefore(clone, checksDiv.firstChild);
+        }
     }
 });
 
-function createItem(){
-    let valueOfInput = document.getElementById("new-item").value;
-    if(!valueOfInput){
-        alert("Please fill the input!");
-        return;
-    }
-
+function createItem() {
     let listDiv = document.createElement('div');
 
     let checkItem = document.createElement('input');
-    checkItem.classList.add('check-item');
     checkItem.type = 'checkbox';
-    checkItem.name = 'taskName';
-    checkItem.value = valueOfInput;
+    checkItem.name = 'task';
+    checkItem.classList.add('check-item');
 
-    let inputLabel = document.createElement('label');
-    inputLabel.innerText = valueOfInput;
+    let inputItem = document.createElement('input');
+    inputItem.type = 'text';
+    inputItem.classList.add('d-inline-block', 'input-item');
+
+    let cancelBtn = document.createElement('button');
+    cancelBtn.classList.add('btn', 'btn-danger', 'btn-md', 'text-light', 'delete-btn');
+    cancelBtn.innerText = 'x';
 
     checksDiv.appendChild(listDiv);
     listDiv.appendChild(checkItem);
-    listDiv.appendChild(inputLabel);
-
-    document.getElementById("new-item").value = '';
-    addCheckboxDiv.hidden = true;
-    plusButton.hidden = false;
+    listDiv.appendChild(inputItem);
+    listDiv.appendChild(cancelBtn);
 }
 
-function checkboxSaveChanges(target){
-    let input = target.previousElementSibling;
-    if(!input.value){
-        alert("Please fill the input!");
-        return;
-    }
+function moveItem(target) {
     let parent = target.parentNode;
-
-    let editButton = parent.previousElementSibling;
-    let label = editButton.previousElementSibling;
-    let checkInput = label.previousElementSibling;
-
-    parent.hidden = true;
-    editButton.hidden = false;
-
-    label.innerText = input.value;
-    checkInput.value = input.value;
-    input.value = '';
+    let clone = parent.cloneNode(true);
+    parent.remove();
+    return clone;
 }
 
 function putData() {
     event.preventDefault();
-    let idList = document.getElementById("idList").value;
+
     let listName = document.getElementById("list-name").value;
+    if(!listName) {
+        alert("Please fill the Title input!");
+        return;
+    }
+
+    let idList = document.getElementById("idList").value;
 
     let listItem = [];
     let listItemChecked = [];
 
-    const checkItems = document.querySelectorAll('input.check-item');
-    checkItems.forEach(function(element){
-        if(!element.checked){
-            listItem.push(element.value);
-        }
-        else{
-            listItemChecked.push(element.value);
+    const checkItems = document.querySelectorAll('input.input-item');
+    checkItems.forEach(function(element) {
+        if(element.value) {
+            if (!element.previousElementSibling.checked) {
+                listItem.push(element.value);
+            }
+            else {
+                listItemChecked.push(element.value);
+            }
         }
     });
     const data = {
