@@ -116,7 +116,6 @@ app.delete("/notes/edit/:id", async function (req, res) {
     res.render('pages/', {notes, lists});
 });
 
-
 app.post('/lists/create', async function (req, res) {
     console.log("post ok");
     const list = {
