@@ -8,18 +8,14 @@
 <main>
     <div class="bg-light rounded py-3" style="height: 80vh">
         <div class="form-group w-50 mx-auto">
-            <form id="edit-note" method="">
-                <div>
+            <form id="edit-note" class="form-group mb-1" method="">
                     <input id="id-note" type='hidden' value="<%= note._id %>">
-                    <input type="text" id = "note-title" class="d-inline-block" value="<%= note.noteTitle %>">
-                    <input type="text" id="note-text" class="d-inline-block" value="<%= note.noteTextContent %>">
-                    <button id="edit-note" type="submit" class="btn btn-info btn-md text-light" style="left: 47%;">Save
-                        changes</button>
-                </div>
+                    <input type="text" id = "note-title" class="form-control mb-2" value="<%= note.noteTitle %>">
+                    <textarea id="note-text" class="form-control w-100" rows="10"><%= note.noteTextContent %></textarea>
             </form>
-            <button id="delete-note" type="submit" class="btn btn-info btn-md text-light" style="left: 47%;
-">Delete note</button>
-            <a href="/"><button type="button" class="btn btn-primary btn-lg">Cancel</button></a>
+            <button id="edit-note" type="submit" class="btn btn-warning btn-md text-light">Save changes</button>
+            <button id="delete-note" type="submit" class="btn btn-info btn-md text-light">Delete note</button>
+            <a href="/"><button type="button" class="btn btn-primary btn-md">Cancel</button></a>
 
         </div>
     </div>

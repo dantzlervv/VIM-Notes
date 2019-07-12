@@ -1,5 +1,22 @@
-.bg {
-    background: url("/img/bg.jpg") no-repeat !important;
+.main-background{
+    background: url("../img/bg.jpg") no-repeat;
     background-size: cover;
-    height: 80vh;
+    min-height: 80vh;
 }
+
+.custom-list{
+    color: #8E6C88;
+    background-color: #63C7B2;
+    width: 12rem;
+}
+
+.custom-note{
+    color: #8E6C88;
+    background-color: #80CED7;
+    width: 12rem;
+}
+
+.decoration:hover{
+    text-decoration: none;
+}
+

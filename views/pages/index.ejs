@@ -9,24 +9,45 @@
     <% include ../partials/header %>
 </header>
 
-<main>
-    <div class="bg-light rounded" style="height: 80vh">
+<main class="bg-light rounded main-background" style="min-height: 80vh">
+    <div id="board" class="row pl-5 py-3">
         <% lists.forEach(function(list) { %>
-            <a href="/lists/edit/<%= list._id %>">
-                <div>
-                    <%= list.listName %>
+            <a data-id="<%= list._id %>" class="decoration" href="/lists/edit/<%= list._id %>">
+                <div class="card mb-2 mx-2 position-relative custom-list">
+                    <button type="submit" class="btn btn-md position-absolute text-white px-1 py-0 delete-list" style="top:0; right:0; cursor:default;"><i class="fa fa-trash-o"></i></button>
+                    <div class="card-header text-white"><%= list.listName %></div>
+                    <div class="card-body">
+                            <% if(list.listItemChecked){ %>
+                            <div class="row align-items-center">
+                                <input type="checkbox" class="mr-2 check-item" checked>
+                                <p class="card-text">
+                                    <%= list.listItemChecked %></p>
+                            </div>
+                        <%}%>
+                        <% if(list.listItem){ %>
+                                    <div class="row align-items-center">
+                                        <input type="checkbox" class="mr-2 check-item">
+                                        <p class="card-text">
+                                            <%= list.listItem %></p>
+                                    </div>
+                        <%}%>
+                    </div>
                 </div>
             </a>
         <% }); %>
-    </div>
-    <div class="bg-light rounded" style="height: 80vh">
+
         <% notes.forEach(function(note) { %>
-            <a href="/notes/edit/<%= note._id %>">
-                <div>
-                    <%= note.noteTitle %>
+            <a data-id="<%= note._id %>" class="decoration" href="/notes/edit/<%= note._id %>">
+                <div class="card mb-2 mx-2 position-relative custom-note">
+                    <button type="submit" class="btn btn-md position-absolute text-white px-1 py-0 delete-note" style="top:0; right:0; cursor:default;"><i class="fa fa-trash-o"></i></button>
+                    <div class="card-header text-white"><%= note.noteTitle %></div>
+                    <div class="card-body">
+                        <p class="card-text"><%= note.noteTextContent %></p>
+                    </div>
                 </div>
             </a>
         <% }); %>
+
     </div>
 </main>
 
@@ -34,5 +55,6 @@
     <% include ../partials/footer %>
 </footer>
 
+<script src="/clientJS/main.js"></script>
 </body>
 </html>
