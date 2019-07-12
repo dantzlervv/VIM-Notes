@@ -104,3 +104,4 @@ function deleteData() {
         })
             .then(response => {window.location.replace("/");})
 }
+
