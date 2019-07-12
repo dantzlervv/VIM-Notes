@@ -11,24 +11,24 @@
             <form id="edit-list-form" method="">
                 <div>
                     <input id="idList" type='hidden' value="<%= list._id %>">
-                    <input type="text" id="list-name" class="d-inline-block" value="<%= list.listName %>">
+                    <input type="text" id="list-name" class="form-control mb-2" value="<%= list.listName %>">
                 </div>
                 <div id="checks">
                     <%if (list.listItem) { %>
                         <% list.listItem.forEach(function(item) { %>
-                        <div>
-                            <input type="checkbox" class="check-item" name="task">
-                            <input type="text" class="d-inline-block input-item" value="<%= item %>">
-                            <button class="btn btn-danger btn-md text-light delete-btn">x</button>
+                        <div class="position-relative mb-1">
+                            <input type="checkbox" class="check-item position-absolute mx-1" style="left:0; top:30%" name="task">
+                            <input type="text" class="form-control input-item pl-4" value="<%= item %>">
+                            <button class="btn btn-sm text-light rounded bg-danger delete-btn position-absolute mr-1" style="right:0; top:10%">x</button>
                         </div>
                         <% }); %>
                     <% } %>
                     <%if (list.listItemChecked) { %>
                         <% list.listItemChecked.forEach(function(item) { %>
-                            <div>
-                                <input type="checkbox" class="check-item" name="task" checked>
-                                <input type="text" class="d-inline-block input-item" value="<%= item %>">
-                                <button class="btn btn-danger btn-md text-light delete-btn">x</button>
+                            <div class="position-relative mb-1">
+                                <input type="checkbox" class="check-item position-absolute mx-1" style="left:0; top:30%" name="task" checked>
+                                <input type="text" class="form-control input-item pl-4" value="<%= item %>">
+                                <button class="btn btn-sm text-light rounded bg-danger delete-btn position-absolute mr-1" style="right:0; top:10%">x</button>
                             </div>
                         <% }); %>
                     <% } %>

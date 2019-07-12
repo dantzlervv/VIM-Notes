@@ -1,15 +1,17 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 const db = require('./db/');
+// const path = require('path');
+
 const bodyParser = require('body-parser');
 const ObjectId = require("mongodb").ObjectId;
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 
-app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
+app.set('view engine', 'ejs');
 
 app.get('/', async function (req, res) {
     const notes = await db.getNotes();
@@ -115,7 +117,6 @@ app.delete("/notes/edit/:id", async function (req, res) {
     const lists = await db.getLists();
     res.render('pages/', {notes, lists});
 });
-
 
 app.post('/lists/create', async function (req, res) {
     console.log("post ok");
