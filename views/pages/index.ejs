@@ -17,19 +17,21 @@
                     <button type="submit" class="btn btn-md position-absolute text-white px-1 py-0 delete-list" style="top:0; right:0; cursor:default;"><i class="fa fa-trash-o"></i></button>
                     <div class="card-header text-white"><%= list.listName %></div>
                     <div class="card-body">
-                            <% if(list.listItemChecked){ %>
-                            <div class="row align-items-center">
-                                <input type="checkbox" class="mr-2 check-item" checked>
-                                <p class="card-text">
-                                    <%= list.listItemChecked %></p>
-                            </div>
-                        <%}%>
                         <% if(list.listItem){ %>
-                                    <div class="row align-items-center">
-                                        <input type="checkbox" class="mr-2 check-item">
-                                        <p class="card-text">
-                                            <%= list.listItem %></p>
-                                    </div>
+                            <% list.listItem.forEach(function(item) { %>
+                                <div class="row align-items-center">
+                                    <input type="checkbox" class="mr-2 check-item">
+                                    <label class="card-text"><%= item %></label>
+                                </div>
+                            <% }); %>
+                        <%}%>
+                        <% if(list.listItemChecked){ %>
+                            <% list.listItemChecked.forEach(function(item) { %>
+                                <div class="row align-items-center">
+                                    <input type="checkbox" class="mr-2 check-item" checked>
+                                    <label class="card-text"><%= item %></label>
+                                </div>
+                            <% }); %>
                         <%}%>
                     </div>
                 </div>
