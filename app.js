@@ -49,12 +49,6 @@ app.get('/lists/edit/:id', async function (req, res) {
     } catch (err) {
         if (result) console.log(err);
     }
-    if(result.listItemChecked){
-            result.listItemChecked = Array.isArray(result.listItemChecked) ? result.listItemChecked : new Array(result.listItemChecked);
-    }
-    if(result.listItem){
-        result.listItem = Array.isArray(result.listItem) ? result.listItem : new Array(result.listItem);
-    }
     const list = {
         _id: query._id,
         listName: result.listName,
@@ -80,9 +74,7 @@ app.post('/notes/create', async function (req, res) {
     } catch (err) {
         console.log(err);
     }
-    const notes = await db.getNotes();
-    const lists = await db.getLists();
-    res.render('pages/', {notes, lists});
+    res.redirect('/');
 });
 
 app.put("/notes/edit/:id", async function (req, res) {
@@ -99,9 +91,7 @@ app.put("/notes/edit/:id", async function (req, res) {
     } catch (err) {
         console.log(err);
     }
-    const notes = await db.getNotes();
-    const lists = await db.getLists();
-    res.render('pages/', {notes, lists});
+    res.redirect('/');
 });
 
 app.delete("/notes/edit/:id", async function (req, res) {
@@ -113,17 +103,25 @@ app.delete("/notes/edit/:id", async function (req, res) {
     } catch (err) {
         console.log(err);
     }
-    const notes = await db.getNotes();
-    const lists = await db.getLists();
-    res.render('pages/', {notes, lists});
+    res.redirect('/');
 });
 
 app.post('/lists/create', async function (req, res) {
     console.log("post ok");
+
+    let listItem = req.body.taskName0;
+    let listItemChecked = req.body.taskName;
+
+    if(listItemChecked){
+        listItemChecked = Array.isArray(listItemChecked) ? listItemChecked : new Array(listItemChecked);
+    }
+    if(listItem){
+        listItem = Array.isArray(listItem) ? listItem : new Array(listItem);
+    }
     const list = {
         listName: req.body.listName,
-        listItemChecked: req.body.taskName,
-        listItem: req.body.taskName0
+        listItemChecked: listItemChecked,
+        listItem: listItem
     };
     let result = null;
     try {
@@ -131,9 +129,7 @@ app.post('/lists/create', async function (req, res) {
     } catch (err) {
         console.log(err);
     }
-    const notes = await db.getNotes();
-    const lists = await db.getLists();
-    res.render('pages/', {notes, lists});
+    res.redirect('/');
 });
 
 app.put("/lists/edit/:id", async function (req, res) {
@@ -151,9 +147,7 @@ app.put("/lists/edit/:id", async function (req, res) {
     } catch (err) {
         console.log(err);
     }
-    const notes = await db.getNotes();
-    const lists = await db.getLists();
-    res.render('pages/', {notes, lists});
+    res.redirect('/');
 });
 
 app.delete("/lists/edit/:id", async function (req, res) {
@@ -165,7 +159,5 @@ app.delete("/lists/edit/:id", async function (req, res) {
     } catch (err) {
         console.log(err);
     }
-    const notes = await db.getNotes();
-    const lists = await db.getLists();
-    res.render('pages/', {notes, lists});
+    res.redirect('/');
 });
