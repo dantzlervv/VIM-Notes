@@ -161,3 +161,17 @@ app.delete("/lists/edit/:id", async function (req, res) {
     }
     res.redirect('/');
 });
+
+app.delete('/api/notes/:id', async (req,res)=>{
+    const query = { _id: ObjectId(req.params.id) };
+    await db.deleteNote(query);
+    res.send("id");
+});
+
+app.delete('/api/lists/:id', async (req,res)=>{
+    const query = { _id: ObjectId(req.params.id) };
+    await db.deleteList(query);
+    res.send("id");
+});
+
+
