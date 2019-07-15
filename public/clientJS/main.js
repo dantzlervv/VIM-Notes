@@ -1,30 +1,68 @@
+$(".delete-note").on('click', function (e) {
+        e.preventDefault();
+        let idNote = $(this).data("id");
+        $.ajax({
+            type: 'DELETE',
+            url: `/api/notes/${idNote}`,
+            data: idNote,
+            success: function (response) {
+                $(`#${idNote}`).remove();
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    });
 
-$('#board').click(function (e) {
-    if ($(e.target).hasClass("delete-note")) {
+$(".delete-list").on('click', function (e) {
+        e.preventDefault();
+        let idList = $(this).data("id");
         $.ajax({
             type: 'DELETE',
-            url: '/notes/edit/' + $(e.target).attr('data-id'),
-            success: function (response) {
-                window.location.href = '/';
+            url: `api/lists/${idList}`,
+            data: idList,
+            success: function (res) {
+                $(`#${idList}`).remove();
             },
             error: function (err) {
                 console.log(err);
             }
         });
-    }
-    if ($(e.target).hasClass("delete-list")) {
+    });
+
+$(".edit-note").on('click', function (e) {
+        e.preventDefault();
+        let idNote = $(this).data("id");
         $.ajax({
-            type: 'DELETE',
-            url: '/lists/edit/' + $(e.target).attr('data-id'),
+            type: 'GET',
+            url: `/notes/edit/${idNote}`,
+            data: idNote,
             success: function (response) {
-                window.location.href = '/';
+                window.location = `/notes/edit/${idNote}`;
             },
             error: function (err) {
                 console.log(err);
             }
         });
-    }
-});
+    });
+
+$(".edit-list").on('click', function (e) {
+        e.preventDefault();
+        let idList = $(this).data("id");
+        $.ajax({
+            type: 'GET',
+            url: `/lists/edit/${idList}`,
+            data: idList,
+            success: function (response) {
+                window.location = `/lists/edit/${idList}`;
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    });
+
+
 
 
 

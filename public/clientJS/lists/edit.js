@@ -28,19 +28,24 @@ document.addEventListener('click', function (e) {
 
 function createItem() {
     let listDiv = document.createElement('div');
+    listDiv.classList.add('position-relative', 'mb-1');
 
     let checkItem = document.createElement('input');
     checkItem.type = 'checkbox';
     checkItem.name = 'task';
-    checkItem.classList.add('check-item');
+    checkItem.classList.add('check-item', 'position-absolute', 'mx-1');
+    checkItem.style.left = '0';
+    checkItem.style.top = '30%';
 
     let inputItem = document.createElement('input');
     inputItem.type = 'text';
-    inputItem.classList.add('d-inline-block', 'input-item');
+    inputItem.classList.add('form-control', 'input-item', 'pl-4');
 
     let cancelBtn = document.createElement('button');
-    cancelBtn.classList.add('btn', 'btn-danger', 'btn-md', 'text-light', 'delete-btn');
+    cancelBtn.classList.add('btn', 'btn-sm', 'text-light','rounded', 'bg-danger', 'delete-btn','position-absolute', 'mr-1');
     cancelBtn.innerText = 'x';
+    cancelBtn.style.right = '0';
+    cancelBtn.style.top = '10%';
 
     checksDiv.appendChild(listDiv);
     listDiv.appendChild(checkItem);

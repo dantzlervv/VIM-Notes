@@ -9,12 +9,12 @@
     <% include ../partials/header %>
 </header>
 
-<main class="bg-light rounded main-background" style="min-height: 80vh">
+<main class="bg-light rounded main-background" style="min-height: 78vh">
     <div id="board" class="row pl-5 py-3">
         <% lists.forEach(function(list) { %>
-            <a data-id="<%= list._id %>" class="decoration" href="/lists/edit/<%= list._id %>">
-                <div class="card mb-2 mx-2 position-relative custom-list">
-                    <button type="submit" class="btn btn-md position-absolute text-white px-1 py-0 delete-list" style="top:0; right:0; cursor:default;"><i class="fa fa-trash-o"></i></button>
+                <div id="<%= list._id %>" class="card mb-2 mx-2 position-relative custom-list">
+                    <button data-id="<%= list._id %>" type="submit" class="btn btn-md position-absolute text-white px-1 py-0 delete-list" style="top:0; right:0;"><i class="fa fa-trash-o"></i></button>
+                    <button data-id="<%= list._id %>" type="submit" class="btn btn-md position-absolute text-white px-1 py-0 edit-list" style="top:1px; right:11%;"><i class="fa fa-pencil-square-o"></i></button>
                     <div class="card-header text-white"><%= list.listName %></div>
                     <div class="card-body">
                         <% if(list.listItem){ %>
@@ -35,19 +35,17 @@
                         <%}%>
                     </div>
                 </div>
-            </a>
         <% }); %>
 
         <% notes.forEach(function(note) { %>
-            <a data-id="<%= note._id %>" class="decoration" href="/notes/edit/<%= note._id %>">
-                <div class="card mb-2 mx-2 position-relative custom-note">
-                    <button type="submit" class="btn btn-md position-absolute text-white px-1 py-0 delete-note" style="top:0; right:0; cursor:default;"><i class="fa fa-trash-o"></i></button>
+                <div id="<%= note._id %>" class="card mb-2 mx-2 position-relative custom-note">
+                    <button data-id="<%= note._id %>" type="submit" class="btn btn-md position-absolute text-white px-1 py-0 delete-note" style="top:0; right:0;"><i class="fa fa-trash-o"></i></button>
+                    <button data-id="<%= note._id %>" type="submit" class="btn btn-md position-absolute text-white px-1 py-0 edit-note" style="top:1px; right:11%;"><i class="fa fa-pencil-square-o"></i></button>
                     <div class="card-header text-white"><%= note.noteTitle %></div>
                     <div class="card-body">
                         <p class="card-text"><%= note.noteTextContent %></p>
                     </div>
                 </div>
-            </a>
         <% }); %>
 
     </div>
@@ -56,6 +54,8 @@
 <footer>
     <% include ../partials/footer %>
 </footer>
+
+<% include ../partials/script %>
 
 <script src="/clientJS/main.js"></script>
 </body>
