@@ -18,12 +18,12 @@
   },
   "homepage": "https://github.com/dantzlervv/Step-Notes#readme",
   "devDependencies": {
-    "ejs": "^2.6.2",
     "nodemon": "^1.19.1"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.9.0",
     "body-parser": "^1.19.0",
+    "ejs": "^2.6.2",
     "express": "^4.17.1",
     "mongodb": "^3.2.7",
     "path": "^0.12.7"
