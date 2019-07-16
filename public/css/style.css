@@ -7,16 +7,13 @@
 .custom-list{
     color: #8E6C88;
     background-color: #63C7B2;
-    width: 12rem;
+    width: 13rem;
 }
 
 .custom-note{
     color: #8E6C88;
     background-color: #80CED7;
-    width: 12rem;
+    width: 13rem;
 }
 
-.decoration:hover{
-    text-decoration: none;
-}
 

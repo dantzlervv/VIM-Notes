@@ -9,10 +9,10 @@
     <% include ../partials/header %>
 </header>
 
-<main class="bg-light rounded main-background" style="min-height: 78vh">
-    <div id="board" class="row pl-5 py-3">
+<main class="container-fluid bg-light rounded d-flex row align-content-start align-items-start justify-content-around justify-content-md-start py-3 pl-3 pr-1 m-0 main-background" style="min-height: 78vh">
+
         <% lists.forEach(function(list) { %>
-                <div id="<%= list._id %>" class="card mb-2 mx-2 position-relative custom-list">
+                <div id="<%= list._id %>" class="card mb-2 mr-2 position-relative custom-list">
                     <button data-id="<%= list._id %>" type="submit" class="btn btn-md position-absolute text-white px-1 py-0 delete-list" style="top:0; right:0;"><i class="fa fa-trash-o"></i></button>
                     <button data-id="<%= list._id %>" type="submit" class="btn btn-md position-absolute text-white px-1 py-0 edit-list" style="top:1px; right:11%;"><i class="fa fa-pencil-square-o"></i></button>
                     <div class="card-header text-white"><%= list.listName %></div>
@@ -38,7 +38,7 @@
         <% }); %>
 
         <% notes.forEach(function(note) { %>
-                <div id="<%= note._id %>" class="card mb-2 mx-2 position-relative custom-note">
+                <div id="<%= note._id %>" class="card mb-2 mr-2 position-relative custom-note">
                     <button data-id="<%= note._id %>" type="submit" class="btn btn-md position-absolute text-white px-1 py-0 delete-note" style="top:0; right:0;"><i class="fa fa-trash-o"></i></button>
                     <button data-id="<%= note._id %>" type="submit" class="btn btn-md position-absolute text-white px-1 py-0 edit-note" style="top:1px; right:11%;"><i class="fa fa-pencil-square-o"></i></button>
                     <div class="card-header text-white"><%= note.noteTitle %></div>
@@ -48,7 +48,7 @@
                 </div>
         <% }); %>
 
-    </div>
+
 </main>
 
 <footer>
