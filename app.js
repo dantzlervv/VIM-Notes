@@ -59,7 +59,7 @@ app.get('/lists/edit/:id', async function (req, res) {
 });
 
 db.testConnection();
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
 console.log('all is good');
 
 app.post('/notes/create', async function (req, res) {
