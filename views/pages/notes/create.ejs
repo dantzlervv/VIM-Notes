@@ -10,11 +10,11 @@
 <main>
     <div class="bg-light rounded py-3" style="height: 78vh">
 
-        <div class="form-group w-50 mx-auto">
+        <div class="form-group col-xl-7 col-lg-7 col-md-8 col-sm-10 col-11 center-block mx-auto">
 
             <form action="/notes/create" class="form-group" method="POST">
                 <input type="text" name="noteTitle"  placeholder="Note Title" class="form-control mb-2" required>
-                <textarea name="noteTextContent"  placeholder="Note Content" class="form-control mb-1" rows="10"></textarea>
+                <textarea name="noteTextContent"  placeholder="Note Content" class="form-control mb-1" rows="7"></textarea>
                 <button type="submit" id="add-note" class="btn btn-warning btn-md text-light">Create</button>
                 <a href="/"><button type="button" class="btn btn-primary text-light btn-md">Cancel</button></a>
             </form>
